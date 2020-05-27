@@ -31,7 +31,7 @@ total_expansions = 0
 num_problems = 50             # solo ejecutamos los primeros 10 problemas
 for prob in range(0, num_problems):
     init = problems[prob]
-    s = Astar(init, heuristic, 1.5) # agregar un tercer parámetro una vez que lo hayas transformado en Weighted A*
+    s = Astar(init, heuristic, 2) # agregar un tercer parámetro una vez que lo hayas transformado en Weighted A*
     result = s.search()
     print('%5d%10d%10d%10d%10.2f%10.2f' % (prob+1, s.expansions, len(s.generated), result.g, s.end_time-s.start_time, s.estimate_suboptimality()))
     total_time += s.end_time - s.start_time

@@ -10,9 +10,14 @@ class Astar:
         self.initial_state = initial_state
         self.heuristic = heuristic
         self.weight = weight
+        self.s = None
 
     def estimate_suboptimality(self):
-        return 0  # este método debe ser implementado en la parte 1
+        cost=self.s.g
+        gh = []
+        for i in self.open:
+            gh.append(i.g+i.h)
+        return cost/min(gh)  # este método debe ser implementado en la parte 1
 
     def fvalue(self, g, h):
         
@@ -35,6 +40,7 @@ class Astar:
             n = self.open.extract()   # extrae n de la open
             if n.state.is_goal():
                 self.end_time = time.process_time()
+                self.s = n
                 return n
             succ = n.state.successors()
             self.expansions += 1
