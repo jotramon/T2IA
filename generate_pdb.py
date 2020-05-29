@@ -95,20 +95,24 @@ def abstract(board, pattern):
 # 8  9 10 11
 #12 13 14 15
 
-pattern = [2, 3, 7, 11]  # patron a utilizar: todo lo que no está en esta lista se transforma en -1
+pattern1 = [2, 3, 7, 11]
+pattern2 = [1, 4, 5, 12]
+pattern3 = [8, 6, 9, 10]
+patterns = [pattern1,pattern2,pattern3]  # patron a utilizar: todo lo que no está en esta lista se transforma en -1
 # al usar el patrón de la línea anterior, el estado final abstracto se ve así:
 # 0 -1  2  3
 #-1 -1 -1  7
 #-1 -1 -1 11
 #-1 -1 -1 -1
+num = 1
+for pattern in patterns:
+    abstract_init = abstract(list(range(16)), pattern)  ## generamos estado inicial en donde se abstrae a -1 todo lo que no esta en pattern
+    init = Puzzle(abstract_init)
 
-
-abstract_init = abstract(list(range(16)), pattern)  ## generamos estado inicial en donde se abstrae a -1 todo lo que no esta en pattern
-init = Puzzle(abstract_init)
-
-f = open('pdb1.txt', 'w')
-f.write(' '.join([str(x) for x in pattern])+'\n') ## escribimos el patron en el archivo
-s = GenericSearch(init, 'bfs', f)  # iniciamos un BFS desde el estado final abstracto
-result = s.search()
-print('Total de estados generados :', len(s.generated))
-f.close()
+    f = open('pdb'+str(num)+'.txt', 'w')
+    f.write(' '.join([str(x) for x in pattern])+'\n') ## escribimos el patron en el archivo
+    s = GenericSearch(init, 'bfs', f)  # iniciamos un BFS desde el estado final abstracto
+    result = s.search()
+    print('Total de estados generados :', len(s.generated))
+    f.close()
+    num += 1

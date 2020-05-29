@@ -20,7 +20,6 @@ class Astar:
         return cost/min(gh)  # este método debe ser implementado en la parte 1
 
     def fvalue(self, g, h):
-        
         return g + self.weight*h
 
     def search(self):

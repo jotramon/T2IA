@@ -13,13 +13,16 @@ def load_problems(problems):  ## carga los problemas en memoria
 
 
 show_solutions = False        # mostramos las soluciones?
-total_problems = 50           # numero de instancias a ejecutar
+total_problems = 10           # numero de instancias a ejecutar
 size = 23                     # tamano del panqueque
 
 #heuristic = Puzzle.zero_heuristic  # h = 0 -- búsqueda ciega
-heuristic = Puzzle.manhattan       # heuristica basda en distancia manhattan
-#heuristic = Puzzle.pdb_1          # una heurística basada en pattern databases que debes implementar
-#Puzzle.initialize_pdb(1)          # inicialización de la heurística basada en PDBs
+#heuristic = Puzzle.manhattan
+Puzzle.initialize_pdb(1)
+Puzzle.initialize_pdb(2)
+Puzzle.initialize_pdb(3)        # heuristica basda en distancia manhattan
+heuristic = Puzzle.pdb_final          # una heurística basada en pattern databases que debes implementar
+         # inicialización de la heurística basada en PDBs
 
 print('%5s%10s%10s%10s%10s%10s' % ('#prob','#exp', '#gen', '|sol|', 'tiempo','maxsubopt'))
 problems = []
@@ -28,7 +31,7 @@ total_time = 0
 total_cost = 0
 total_expansions = 0
 #num_problems = len(problems) # cambiar si quieres ejecutar sobre todos los problemas
-num_problems = 50             # solo ejecutamos los primeros 10 problemas
+num_problems = 10             # solo ejecutamos los primeros 10 problemas
 for prob in range(0, num_problems):
     init = problems[prob]
     s = Astar(init, heuristic, 2) # agregar un tercer parámetro una vez que lo hayas transformado en Weighted A*

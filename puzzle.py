@@ -34,10 +34,33 @@ class Puzzle:
                 self.blank = board.index(0)
 
     def initialize_pdb(id):
-        pass  #  Debes implementar esto!
-
+        archivo = open("pdb"+str(id)+".txt",'r')
+        Puzzle.pdb_pattern[id] = archivo.readline().strip().split()
+        for i in archivo:
+            lista = i.strip().split()
+            h = lista.pop()
+            patron = " ".join(lista)
+            Puzzle.pdb[id][patron] = h
+        
     def pdb_heuristic(self, id):
-        pass # Debes implementar esto!
+        pdb = Puzzle.pdb[id]
+        if not pdb:
+            return self.manhattan()
+        else:
+            tabla =[]
+            for i in range(self.size):
+                tabla.append("-1")          
+            for j in range(len(self.board)):
+                if self.board[j] == 0:
+                    tabla[j] = "0"
+            for e in Puzzle.pdb_pattern[id]:
+                for j in range(len(self.board)):
+                    if self.board[j] == int(e):
+                        tabla[j] = e
+            estado = " ".join(tabla)
+            heuristica = Puzzle.pdb[id][estado]
+            manhattan = self.manhattan()
+            return int(heuristica)
 
     def pdb_1(self):
         return self.pdb_heuristic(1)
@@ -51,7 +74,11 @@ class Puzzle:
     ## acá, agrega más llamados si lo deseas!
 
     def pdb_final(self):
-        pass ## esta es la mejor combinación que encontraste!
+        h1 = self.pdb_1()
+        h2 = self.pdb_2()
+        h3 = self.pdb_3()
+        hm = self.manhattan()
+        return max([h1,h2,h3,hm])
 
     def __hash__(self):
         return hash(tuple(self.board))
