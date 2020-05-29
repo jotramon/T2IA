@@ -21,7 +21,7 @@ size = 23                     # tamano del panqueque
 Puzzle.initialize_pdb(1)
 Puzzle.initialize_pdb(2)
 Puzzle.initialize_pdb(3)        # heuristica basda en distancia manhattan
-heuristic = Puzzle.pdb_final          # una heurística basada en pattern databases que debes implementar
+heuristic = Puzzle.pdb_best        # una heurística basada en pattern databases que debes implementar
          # inicialización de la heurística basada en PDBs
 
 print('%5s%10s%10s%10s%10s%10s' % ('#prob','#exp', '#gen', '|sol|', 'tiempo','maxsubopt'))

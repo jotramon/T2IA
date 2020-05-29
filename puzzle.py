@@ -73,7 +73,7 @@ class Puzzle:
 
     ## acá, agrega más llamados si lo deseas!
 
-    def pdb_final(self):
+    def pdb_best(self):
         h1 = self.pdb_1()
         h2 = self.pdb_2()
         h3 = self.pdb_3()
